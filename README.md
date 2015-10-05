@@ -5,20 +5,17 @@
 b03902015
 
 
-#### HashID
+#### Hash ID
 142
 
 
-#### Compile and Run  
-###### Compile
-`$make`
-###### Run
-`$make run`
-###### Clean
-`$make clean`
+#### Compile and Run
+Enter the directory `hw*` for each homework
+* Compile	`$make`
+* Run	`$make run`
+* Clean	`$make clean`
 
 
 #### Overview
-###### hw1
-A Old-maid CardGame
+* `hw1`	An Old-maid CardGame
 
