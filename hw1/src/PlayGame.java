@@ -39,9 +39,12 @@ public class PlayGame {
 //		print start message
 		System.out.println("Game start");
 //		check if there's a player having no cards
-		if( players.get(0).isWinner() && players.get(1).isWinner() )	System.out.println("Player0 and Player1 win");
-		else if( players.get(0).isWinner() )	System.out.println("Player0 wins");
-		else if( players.get(1).isWinner() )	System.out.println("Player1 wins");
+		Player tmp0 = players.get(0), tmp1 = players.get(1);
+		if( tmp0.isWinner() && tmp1.isWinner() )	System.out.println("Player0 and Player1 win");
+		else if( tmp0.isWinner() )	System.out.println("Player0 wins");
+		else if( tmp1.isWinner() )	System.out.println("Player1 wins");
+		if( tmp0.isWinner() )	players.remove(tmp0);
+		if( tmp1.isWinner() )	players.remove(tmp1);
 		start();
 	}
 
@@ -68,7 +71,7 @@ public class PlayGame {
 				flag = 1;
 				System.out.println("Basic game over\nContinue");
 			}
-			if( players.size() == 1 )	break;
+			if( players.size() <= 1 )	break;
 //			get a card from another player
 			int randCard = players.get( (current + 1) % players.size() ).getRandCard();
 //			print draw message
@@ -93,17 +96,19 @@ public class PlayGame {
 				Player dead2 = players.get( (current + 1) % players.size() );
 				players.remove(dead1);
 				players.remove(dead2);
+				current %= players.size();
 			}
 			else if( players.get(current).isWinner() ) {
-				System.out.println( String.format(Locale.getDefault(), "Player%d wins", current) );
+				System.out.println( String.format(Locale.getDefault(), "Player%d wins", players.get(current).getIndex() ) );
 				players.remove(current);
+				current %= players.size();
 			}
 			else if( players.get( (current + 1) % players.size() ).isWinner() ) {
-				System.out.println( String.format( Locale.getDefault(), "Player%d wins", (current + 1) % players.size() ) );
+				System.out.println( String.format( Locale.getDefault(), "Player%d wins", players.get( (current + 1) % players.size() ).getIndex() ) );
 				players.remove( (current + 1) % players.size() );
+				current = ( (current + 1) % (players.size() + 1) ) % players.size();
 			}
-//			next turn
-			current = (current + 1) % players.size();
+			else	current = (current + 1) % players.size();
 		}
 //		print game over
 		System.out.println("Bonus game over");
