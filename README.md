@@ -18,4 +18,5 @@ Enter the directory `hw*` for each homework
 
 #### Overview
 * `hw1`	An Old-maid CardGame
+* `hw2`	POOCasino Game
 
